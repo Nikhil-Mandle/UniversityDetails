@@ -7,7 +7,7 @@ data class University(
     val genreName: String,
     @DrawableRes
     val coverImage: Int,
-    val universities: List<Course>
+    val universitiesCourses: List<Course>
 )
 
 data class Course(

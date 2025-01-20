@@ -215,11 +215,6 @@ object CourseDataSource {
             professor = "Rebecca Skloot"
         ),
         Course(
-            name = "Geography",
-            image = R.drawable.geography,
-            professor = "Michelle Obama"
-        ),
-        Course(
             name = "Music",
             image = R.drawable.music,
             professor = "David McCullough"
@@ -283,11 +278,6 @@ object CourseDataSource {
             professor = "Bram Stoker"
         ),
         Course(
-            name = "Chemistry",
-            image = R.drawable.chemistry_img,
-            professor = "Mary Shelley"
-        ),
-        Course(
             name = "Computer Science",
             image = R.drawable.cs_img,
             professor = "Josh Malerman"
@@ -318,11 +308,6 @@ object CourseDataSource {
             professor = "Bram Stoker"
         ),
         Course(
-            name = "Chemistry",
-            image = R.drawable.chemistry_img,
-            professor = "Mary Shelley"
-        ),
-        Course(
             name = "Computer Science",
             image = R.drawable.cs_img,
             professor = "Josh Malerman"
@@ -348,32 +333,32 @@ object CourseDataSource {
         University(
             genreName = "MIT University",
             coverImage = R.drawable.mit_img,
-            universities = mitCourses
+            universitiesCourses = mitCourses
         ),
         University(
             genreName = "Harvard University",
             coverImage = R.drawable.harvard_img,
-            universities = harvardCourses
+            universitiesCourses = harvardCourses
         ),
         University(
             genreName = "Stanford University",
             coverImage = R.drawable.stanford_university_img,
-            universities = stanfordCourses
+            universitiesCourses = stanfordCourses
         ),
         University(
             genreName = "Cambridge University",
             coverImage = R.drawable.university_of_uk,
-            universities = cambridgeCources
+            universitiesCourses = cambridgeCources
         ),
         University(
             genreName = "Oxford University",
             coverImage = R.drawable.oxford_university,
-            universities = oxfordCourses
+            universitiesCourses = oxfordCourses
         ),
         University(
             genreName = "Caltech University",
             coverImage = R.drawable.caltech_img,
-            universities = caltechCourses
+            universitiesCourses = caltechCourses
         )
     )
 }

@@ -1,12 +1,11 @@
 package com.nikhilproject.universitydetails
 
 import android.app.Application
-import com.nikhilproject.data.di.DataModule
-import com.nikhilproject.data.di.DomainModule
+import com.nikhilproject.data.di.dataModule
+import com.nikhilproject.data.di.domainModule
 import com.nikhilproject.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
-import org.koin.ksp.generated.module
 
 class MyApp : Application() {
 
@@ -17,8 +16,8 @@ class MyApp : Application() {
             androidContext(this@MyApp)
 
             modules(
-                DataModule().module,
-                DomainModule().module,
+                dataModule,
+                domainModule,
                 presentationModule
             )
         }

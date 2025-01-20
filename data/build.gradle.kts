@@ -3,7 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
 
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.ksp)
+//    alias(libs.plugins.ksp)
+    id("kotlin-kapt")
 }
 
 android {
@@ -58,5 +59,5 @@ dependencies {
     implementation(libs.koin.compose.viewmodel)
     // Added
     implementation(libs.koin.annotation)
-    ksp(libs.koin.ksp.compiler)
+//    ksp(libs.koin.ksp.compiler)
 }

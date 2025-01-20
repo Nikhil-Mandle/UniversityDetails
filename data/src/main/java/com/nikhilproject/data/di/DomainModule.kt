@@ -1,15 +1,9 @@
 package com.nikhilproject.data.di
 
-import com.nikhilproject.domain.repository.UniversityDetailsRepository
 import com.nikhilproject.domain.use_case.UniversityDetailsUseCase
-import org.koin.core.annotation.Factory
-import org.koin.core.annotation.Module
+import org.koin.dsl.module
 
-@Module
-class DomainModule {
+val domainModule = module {
+    single { UniversityDetailsUseCase(get()) }
 
-    @Factory
-    fun provideEmployeeUseCase(repository: UniversityDetailsRepository): UniversityDetailsUseCase {
-        return UniversityDetailsUseCase(repository)
-    }
 }

@@ -3,8 +3,8 @@ package com.nikhilproject.presentation.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nikhilproject.domain.model.Course
+import com.nikhilproject.domain.model.University
 import com.nikhilproject.domain.use_case.UniversityDetailsUseCase
-import com.nikhilproject.presentation.utils.BottomSheetDetails
 import com.nikhilproject.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,14 +18,10 @@ class UniversityDetailsViewModel(private val universityDetailsUseCase: Universit
     private val _uiState = MutableStateFlow<UIState>(UIState.Loading)
     val uiState: StateFlow<UIState> = _uiState
 
-    private val originalUniversityList = mutableListOf<Course>()
-    private val _filteredCourses = MutableStateFlow<List<Course>>(emptyList())
+    private val _selectedCourses = MutableStateFlow<List<Course>>(emptyList())
+    val selectedCourses: StateFlow<List<Course>> = _selectedCourses
 
-    private val _bottomSheetDetails = MutableStateFlow(
-        BottomSheetDetails(0, emptyMap())
-    )
-    val bottomSheetDetails: StateFlow<BottomSheetDetails> = _bottomSheetDetails
-
+    private val universityList = mutableListOf<University>()
 
     init {
         loadUniversityDetails()
@@ -35,28 +31,36 @@ class UniversityDetailsViewModel(private val universityDetailsUseCase: Universit
         viewModelScope.launch {
             try {
                 _uiState.value = UIState.Loading
-                val universityDetails = universityDetailsUseCase()
-                originalUniversityList.addAll(universityDetails.flatMap { it.universities })
-                _filteredCourses.value = originalUniversityList
-                _uiState.value = UIState.Success(universityDetails)
+                val universities = universityDetailsUseCase()
+                universityList.addAll(universities)
+                _uiState.value = UIState.Success(universities)
+                updateSelectedCourses(0)
             } catch (e: Exception) {
                 _uiState.value = UIState.Error(e.localizedMessage ?: "An error occurred")
             }
         }
     }
 
-    fun calculateCharacterOccurrencesFromList(courses: List<Course>) {
-        // Combine all relevant fields into a single string
-        val combinedText = courses.joinToString("") { "${it.name}${it.professor}" }
-
-        // Calculate character occurrences
-        val occurrences = combinedText.groupingBy { it }.eachCount()
-        val sortedOccurrences = occurrences.entries
-            .sortedByDescending { it.value }
-            .take(3)
-            .associate { it.toPair() }
-
-        _bottomSheetDetails.value = BottomSheetDetails(combinedText.length, sortedOccurrences)
+    fun setSelectedUniversity(index: Int) {
+        updateSelectedCourses(index)
     }
 
+    private fun updateSelectedCourses(index: Int) {
+        _selectedCourses.value = universityList.getOrNull(index)?.universitiesCourses.orEmpty()
+    }
+
+    fun filterCourses(query: String) {
+        viewModelScope.launch {
+            val filteredCourses = if (query.isBlank()) {
+                universityList.flatMap { it.universitiesCourses }
+            } else {
+                universityList.flatMap { it.universitiesCourses }
+                    .filter { course ->
+                        course.name.contains(query, ignoreCase = true) ||
+                                course.professor.contains(query, ignoreCase = true)
+                    }
+            }
+            _selectedCourses.value = filteredCourses
+        }
+    }
 }
