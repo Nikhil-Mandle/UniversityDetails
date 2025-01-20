@@ -49,8 +49,10 @@ fun CardItemView(course: Course) {
             )
             Column(
                 Modifier
-                    .padding(horizontal = 8.dp, vertical = 0.dp)
-//                        .fillMaxHeight()
+                    .padding(
+                        horizontal = 8.dp,
+                        vertical = 0.dp
+                    )
                     .align(Alignment.CenterVertically)
             ) {
                 Text(

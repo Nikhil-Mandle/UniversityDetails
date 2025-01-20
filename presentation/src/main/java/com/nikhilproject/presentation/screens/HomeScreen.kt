@@ -67,6 +67,10 @@ fun HomeScreen(viewModel: UniversityDetailsViewModel = koinViewModel()) {
                 it.professor.contains(userQuery, ignoreCase = true)
     }
 
+    LaunchedEffect(pagerState.currentPage) {
+        pagerState.animateScrollToPage(pagerState.currentPage)
+    }
+
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(

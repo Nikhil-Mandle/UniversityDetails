@@ -5,5 +5,4 @@ import com.nikhilproject.domain.model.University
 interface UniversityDetailsRepository {
 
     suspend fun getUniversityDetails(): List<University>
-
 }

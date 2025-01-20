@@ -1,5 +1,12 @@
 package com.nikhilproject.presentation.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -36,10 +43,11 @@ fun HomeScreenView(
             .wrapContentHeight()
             .pointerInput(Unit) {
                 detectTapGestures(onTap = {
-                    focusManager.clearFocus() // Clear focus from text fields
-                    keyboardController?.hide() // Hide the keyboard
+                    focusManager.clearFocus()
+                    keyboardController?.hide()
                 })
             }
+            .animateContentSize()
     ) {
         item {
             CardCarousel(
@@ -61,9 +69,15 @@ fun HomeScreenView(
         }
 
         items(courseList) { course ->
-            CardItemView(course)
+            AnimatedVisibility(
+                visible = true,
+                enter = fadeIn(animationSpec = tween(durationMillis = 3000)) +
+                        slideInVertically(animationSpec = tween(durationMillis = 3000)) { it / 2 },
+                exit = fadeOut(animationSpec = tween(durationMillis = 3000)) +
+                        slideOutVertically(animationSpec = tween(durationMillis = 3000)) { it / 2 }
+            ) {
+                CardItemView(course)
+            }
         }
     }
 }
-
-

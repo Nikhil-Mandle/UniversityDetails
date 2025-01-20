@@ -46,10 +46,7 @@ class UniversityDetailsViewModel(private val universityDetailsUseCase: Universit
     }
 
     fun calculateCharacterOccurrencesFromList(courses: List<Course>) {
-        // Combine all relevant fields into a single string
         val combinedText = courses.joinToString("") { "${it.name}${it.professor}" }
-
-        // Calculate character occurrences
         val occurrences = combinedText.groupingBy { it }.eachCount()
         val sortedOccurrences = occurrences.entries
             .sortedByDescending { it.value }

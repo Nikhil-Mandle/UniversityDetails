@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.PagerDefaults
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
@@ -25,6 +26,8 @@ fun CardCarousel(
     carouselItems: List<Int>,
     pagerState: PagerState
 ) {
+    val flingBehavior = PagerDefaults.flingBehavior(pagerState)
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -33,7 +36,8 @@ fun CardCarousel(
             state = pagerState,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
+                .height(200.dp),
+            flingBehavior = flingBehavior
         ) { index ->
             Image(
                 painter = painterResource(id = carouselItems[index]),
@@ -59,6 +63,7 @@ fun CardCarousel(
         }
     }
 }
+
 
 
 @Preview

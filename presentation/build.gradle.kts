@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-//    kotlin("plugin.serialization") version "2.1.0"
 
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
@@ -47,7 +46,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-//    Compose Dependencies
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -74,7 +72,6 @@ dependencies {
     implementation(libs.koin.compose)
     implementation(libs.koin.coroutines)
     implementation(libs.koin.compose.viewmodel)
-    // Added
     implementation(libs.koin.annotation)
     ksp(libs.koin.ksp.compiler)
 
